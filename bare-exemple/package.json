@@ -9,15 +9,16 @@
   "scripts": {
     "start": "meteor run",
     "test": "meteor npm run test:unit && meteor npm run test:packages",
-    "test:coverage": "meteor npm run test:unit:coverage && meteor npm run test:packages:coverage",
-    "test:unit": "TEST_BROWSER_DRIVER=puppeteer meteor test --once --driver-package meteortesting:mocha --raw-logs",
-    "coverage:watch": "COVERAGE=1 COVERAGE_VERBOSE=1 TEST_WATCH=1 COVERAGE_APP_FOLDER=$(pwd)/ meteor test --driver-package meteortesting:mocha --raw-logs",
-    "test:unit:coverage": "TEST_BROWSER_DRIVER=puppeteer COVERAGE=1 COVERAGE_VERBOSE=1 COVERAGE_OUT_HTML=1 COVERAGE_OUT_LCOVONLY=1 COVERAGE_APP_FOLDER=$(pwd)/ meteor test --once --driver-package meteortesting:mocha --raw-logs",
-    "test:unit:browser": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --raw-logs",
-    "test:packages": "TEST_BROWSER_DRIVER=puppeteer meteor test-packages --once --driver-package=meteortesting:mocha --raw-logs",
-    "test:packages:watch": "TEST_WATCH=1 meteor test-packages --driver-package=meteortesting:mocha --raw-logs",
-    "test:packages:coverage": "TEST_BROWSER_DRIVER=puppeteer COVERAGE=1 COVERAGE_OUT_HTML=1 COVERAGE_APP_FOLDER=$(pwd)/ meteor test-packages --once --driver-package=meteortesting:mocha --raw-logs",
-    "test:packages:browser": "TEST_WATCH=1 meteor test-packages --driver-package meteortesting:mocha --raw-logs"
+    "test:add:packages": "meteor add meteortesting:mocha@1.1.1",
+    "test:coverage": "meteor npm run test:add:packages && meteor npm run test:unit:coverage && meteor npm run test:packages:coverage",
+    "test:unit": "meteor npm run test:add:packages && TEST_BROWSER_DRIVER=puppeteer meteor test --once --driver-package meteortesting:mocha --raw-logs",
+    "coverage:watch": "meteor npm run test:add:packages && COVERAGE=1 COVERAGE_VERBOSE=1 TEST_WATCH=1 COVERAGE_APP_FOLDER=$(pwd)/ meteor test --driver-package meteortesting:mocha --raw-logs",
+    "test:unit:coverage": "meteor npm run test:add:packages && TEST_BROWSER_DRIVER=puppeteer COVERAGE=1 COVERAGE_VERBOSE=1 COVERAGE_OUT_HTML=1 COVERAGE_OUT_LCOVONLY=1 COVERAGE_APP_FOLDER=$(pwd)/ meteor test --once --driver-package meteortesting:mocha --raw-logs",
+    "test:unit:browser": "meteor npm run test:add:packages && TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --raw-logs",
+    "test:packages": "meteor npm run test:add:packages && TEST_BROWSER_DRIVER=puppeteer meteor test-packages --once --driver-package=meteortesting:mocha --raw-logs",
+    "test:packages:watch": "meteor npm run test:add:packages && TEST_WATCH=1 meteor test-packages --driver-package=meteortesting:mocha --raw-logs",
+    "test:packages:coverage": "meteor npm run test:add:packages && TEST_BROWSER_DRIVER=puppeteer COVERAGE=1 COVERAGE_OUT_HTML=1 COVERAGE_APP_FOLDER=$(pwd)/ meteor test-packages --once --driver-package=meteortesting:mocha --raw-logs",
+    "test:packages:browser": "meteor npm run test:add:packages && TEST_WATCH=1 meteor test-packages --driver-package meteortesting:mocha --raw-logs"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.5",
